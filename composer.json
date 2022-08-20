@@ -1,0 +1,16 @@
+{
+    "name": "brammm/php-image-labeler",
+    "type": "project",
+    "autoload": {
+        "psr-4": {
+            "Brammm\\PhpImageLabeler\\": "src/"
+        }
+    },
+    "authors": [
+        {
+            "name": "Bram Van der Sype",
+            "email": "bram.vandersype@gmail.com"
+        }
+    ],
+    "require": {}
+}
