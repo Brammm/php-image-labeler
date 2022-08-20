@@ -1,5 +1,6 @@
 <?php
 
+use Fig\Http\Message\StatusCodeInterface;
 use Intervention\Image\Gd\Font;
 use Intervention\Image\Image;
 use Intervention\Image\ImageManager;
@@ -48,16 +49,16 @@ function getImage(string $path, array $params): Image {
         $y += $size + 10;
     };
 
-    if (array_key_exists('size', $params)) {
+    if (array_key_exists('size', $params) && $params['size']) {
         $addText($img, 'Maat: ' . $params['size'], 30);
     }
-    if (array_key_exists('brand', $params)) {
+    if (array_key_exists('brand', $params) && $params['brand']) {
         $addText($img, 'Merk: ' . $params['brand'], 30);
     }
-    if (array_key_exists('state', $params)) {
+    if (array_key_exists('state', $params) && $params['state']) {
         $addText($img, $params['state'], 30);
     }
-    if (array_key_exists('price', $params)) {
+    if (array_key_exists('price', $params) && $params['price']) {
         $addText($img, 'Startprijs: ' . $params['price'] . ' euro', 30);
     }
     if (array_key_exists('halfbid', $params)) {
@@ -85,6 +86,19 @@ $app->get('/image/{index}', function (Request $request, Response $response, arra
     $image = $images[$args['index']];
 
     return getImage($image, $request->getQueryParams())->psrResponse();
+});
+
+$app->post('/save', function (Request $request, Response $response) use ($images) {
+    $body  = $request->getParsedBody();
+    $index = $body['index'];
+    $path  = $images[$index];
+    $img   = getImage($path, $body);
+
+    $img->save(__DIR__ . '/../images/processed/' . basename($path));
+
+    return $response
+        ->withStatus(StatusCodeInterface::STATUS_FOUND)
+        ->withHeader('Location', '/?index=' . min(count($images) - 1, $index + 1));
 });
 
 $app->run();

@@ -4,12 +4,14 @@
     <div>
         <img src="/image/<?=$index?>" alt="Foto kleding" id="image" />
     </div>
-    <form style="margin-left: 2rem" id="form">
+    <form style="margin-left: 2rem" id="form" action="/save" method="post">
+        <input type="hidden" name="index" value="<?=$index?>" />
         <p>
             <span>Maat: <br /></span>
             <label for="size_50"><input type="radio" name="size" id="size_50" value="50" />50</label>
             <label for="size_56"><input type="radio" name="size" id="size_56" value="56" />56</label>
             <label for="size_62"><input type="radio" name="size" id="size_62" value="62" />62</label>
+            <label for="size_6268"><input type="radio" name="size" id="size_6268" value="62/68" />62/68</label>
             <label for="size_68"><input type="radio" name="size" id="size_68" value="68" />68</label>
             <label for="size_74"><input type="radio" name="size" id="size_74" value="74" />74</label>
             <label for="size_80"><input type="radio" name="size" id="size_80" value="80" />80</label>
@@ -41,6 +43,9 @@
                 <input type="checkbox" id="pickup" name="pickup" value="1" />
                 Enkel op te halen bij verkoper of regioverantwoordelijke
             </label>
+        </p>
+        <p>
+            <button type="submit">Opslaan</button>
         </p>
     </form>
 </div>
