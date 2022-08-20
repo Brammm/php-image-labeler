@@ -31,35 +31,40 @@ function getImage(string $path, array $params): Image {
         $constraint->upsize();
     });
 
-    $addText = function (Image $img, string $text, int $y, int $size) {
+    $addText = function (Image $img, string $text, int $size) {
+        static $y = 70;
+
         $img->text(
             $text,
             100,
             $y,
             static function (Font $font) use ($size) {
                 $font
+                    ->valign('top')
                     ->file(__DIR__ . '/../templates/courier.ttf')
                     ->size($size);
             });
+
+        $y += $size + 10;
     };
 
-    $yOffset = 100;
     if (array_key_exists('size', $params)) {
-        $addText($img, $params['size'], $yOffset, 100);
-        $yOffset += 50;
+        $addText($img, 'Maat: ' . $params['size'], 30);
+    }
+    if (array_key_exists('brand', $params)) {
+        $addText($img, 'Merk: ' . $params['brand'], 30);
+    }
+    if (array_key_exists('state', $params)) {
+        $addText($img, $params['state'], 30);
     }
     if (array_key_exists('price', $params)) {
-        $addText($img, 'Startprijs: ' . $params['price'] . ' euro', $yOffset, 30);
-        $yOffset += 40;
+        $addText($img, 'Startprijs: ' . $params['price'] . ' euro', 30);
     }
-
     if (array_key_exists('halfbid', $params)) {
-        $addText($img, 'Opbieden per halve euro toegestaan', $yOffset - 10, 20);
-        $yOffset += 40;
+        $addText($img, 'Opbieden per halve euro toegestaan', 20);
     }
-
-    if (array_key_exists('state', $params)) {
-        $addText($img, $params['state'], $yOffset, 30);
+    if (array_key_exists('pickup', $params)) {
+        $addText($img, 'Enkel op te halen bij verkoper of regioverantwoordelijke', 20);
     }
 
     return $img;

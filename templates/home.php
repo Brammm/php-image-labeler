@@ -19,7 +19,15 @@
             <label for="size_104"><input type="radio" name="size" id="size_104" value="104" />104</label>
         </p>
         <p>
-            <label for="price">Prijs: <br />
+            <label for="brand">Merk: <br />
+                <input type="text" name="brand" id="brand" value="" /></label>
+        </p>
+        <p>
+            <label for="state">Staat: <br />
+                <input type="text" name="state" id="state" value="" /></label>
+        </p>
+        <p>
+            <label for="price">Startprijs: <br />
             <input type="number" name="price" id="price" value="" /></label>
         </p>
         <p>
@@ -29,8 +37,10 @@
             </label>
         </p>
         <p>
-            <label for="state">Staat: <br />
-                <input type="text" name="state" id="state" value="" /></label>
+            <label for="pickup">
+                <input type="checkbox" id="pickup" name="pickup" value="1" />
+                Enkel op te halen bij verkoper of regioverantwoordelijke
+            </label>
         </p>
     </form>
 </div>
