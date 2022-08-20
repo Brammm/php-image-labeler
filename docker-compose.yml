@@ -1,0 +1,11 @@
+version: "3.8"
+
+services:
+    php-image-labeler-php:
+        build:
+           context: ./
+           dockerfile: docker/php/Dockerfile
+        ports:
+            - 8800:80
+        volumes:
+            -   ./:/var/www/app
