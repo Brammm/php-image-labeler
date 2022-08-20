@@ -31,58 +31,35 @@ function getImage(string $path, array $params): Image {
         $constraint->upsize();
     });
 
-    $yOffset = 100;
-    if (array_key_exists('size', $params)) {
+    $addText = function (Image $img, string $text, int $y, int $size) {
         $img->text(
-            $params['size'],
+            $text,
             100,
-            $yOffset,
-            static function (Font $font) {
+            $y,
+            static function (Font $font) use ($size) {
                 $font
                     ->file(__DIR__ . '/../templates/courier.ttf')
-                    ->size(100);
+                    ->size($size);
             });
+    };
 
+    $yOffset = 100;
+    if (array_key_exists('size', $params)) {
+        $addText($img, $params['size'], $yOffset, 100);
         $yOffset += 50;
     }
     if (array_key_exists('price', $params)) {
-        $img->text(
-            'Startprijs: ' . $params['price'] . ' euro',
-            100,
-            $yOffset,
-            static function (Font $font) {
-                $font
-                    ->file(__DIR__ . '/../templates/courier.ttf')
-                    ->size(30);
-            });
-
+        $addText($img, 'Startprijs: ' . $params['price'] . ' euro', $yOffset, 30);
         $yOffset += 40;
     }
 
     if (array_key_exists('halfbid', $params)) {
-        $img->text(
-            'Opbieden per halve euro toegestaan',
-            100,
-            $yOffset - 10,
-            static function (Font $font) {
-                $font
-                    ->file(__DIR__ . '/../templates/courier.ttf')
-                    ->size(20);
-            });
-
+        $addText($img, 'Opbieden per halve euro toegestaan', $yOffset - 10, 20);
         $yOffset += 40;
     }
 
     if (array_key_exists('state', $params)) {
-        $img->text(
-            $params['state'],
-            100,
-            $yOffset,
-            static function (Font $font) {
-                $font
-                    ->file(__DIR__ . '/../templates/courier.ttf')
-                    ->size(30);
-            });
+        $addText($img, $params['state'], $yOffset, 30);
     }
 
     return $img;
