@@ -10,7 +10,7 @@ RUN apt update && apt install -y \
 		libpng-dev \
         unzip \
     && docker-php-ext-configure gd --with-freetype --with-jpeg \
-	&& docker-php-ext-install -j$(nproc) gd
+	&& docker-php-ext-install -j$(nproc) gd exif
 
 WORKDIR /var/www/app
 

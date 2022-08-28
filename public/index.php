@@ -27,6 +27,19 @@ function getImage(string $path, array $params): Image {
     $imageManager = new ImageManager();
 
     $img = $imageManager->make($path);
+
+    switch ($img->exif()['Orientation'] ?? 0) {
+        case 3:
+            $img->rotate(180);
+            break;
+        case 6:
+            $img->rotate(270);
+            break;
+        case 8:
+            $img->rotate(90);
+            break;
+    }
+
     $img->resize(1200, 1200, function ($constraint) {
         $constraint->aspectRatio();
         $constraint->upsize();
