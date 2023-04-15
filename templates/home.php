@@ -30,7 +30,7 @@
         </p>
         <p>
             <label for="price">Startprijs: <br />
-            <input type="number" name="price" id="price" value="" /></label>
+            <input type="number" name="price" id="price" value="" step="0.5" /></label>
         </p>
         <p>
             <label for="halfbid">
