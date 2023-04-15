@@ -18,6 +18,7 @@
             <label for="size_86"><input type="radio" name="size" id="size_86" value="86" />86</label>
             <label for="size_92"><input type="radio" name="size" id="size_92" value="92" />92</label>
             <label for="size_98"><input type="radio" name="size" id="size_98" value="98" />98</label>
+            <label for="size_98104"><input type="radio" name="size" id="size_98104" value="98/104" />98/104</label>
             <label for="size_104"><input type="radio" name="size" id="size_104" value="104" />104</label>
         </p>
         <p>
